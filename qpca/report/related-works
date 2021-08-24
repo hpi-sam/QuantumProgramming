@@ -1,0 +1,39 @@
+A survey through the landscape and horizons of quantum software engineering has been compiled by J. Zhao (\cite{Zhao, 2020}). They introduced a quantum software life cycle from requirements analysis up to maintance based on the concepts from classical computing. They also discussed analogies and difference between classical and quantum based software development and challanges that arises from there.
+
+Braje and Cortese gave an overview of different quantum circuit patterns for \enquote{Loading Classical Data into a Quantum Computer} (\cite{Braje, 2018}). The common idea behind all the patterns discussed in their paper is that each qubit is initialized with a classical state representing one bit in the classical data. Since quantum hardware and therefore the total amount of qubits on a real quantum device is limited, techniques are introduced to reduce the amount of qubits by encoding their information onto neighbored qubits and then free these \emph{discard qubits}.
+
+Due to the physical attributes of quantum hardware quantum based solutions need to be robust in respect to information entropy. A ground breaking paper leading into the fields of Information Theory was published by Shannon in 1948 already (\cite{Shannon, 1948}). It addresses the differences in discrete and continuous communication and the challenges introduced from noise. This lead to different research on \emph{error codes} [...] 
+- [TODO] need some papers here...
+
+Regarding quantum software testing there are different approaches researched and introduced to ensure code quality or algorithm robustness on different levels. 
+- statistical assertions
+- [TODO] dynamic runtime assertions
+- [TODO] Poq projection based assertions
+- [TODO] Monitoring measurements
+
+A hands-on approach into quantum computing is provided by the qiskit community and their online \emph{Qiskit Textbook}\footnote{url qiskit textbook}. The articles start with the basics, give a broad survey through basic quantum algorithms and articles on complex tasks like solving linear systems of equations or modelling quantum based neural networks. Another beginner friendly paper is \enquote{Quantum Algortihm Implementations for Beginners} by Lokhov et.~al. (\cite{Lokhov, 2020}). They discuss a broad variety of quantum based algorithms giving a short theoretical background for each and a practical example implemented with IBM experience \fottnote{IBM experience}. The basic PCA algorithm on a $2 \times 2$ matrix that is implemented in this paper is taken from there.
+
+\enquote{A Low Complexity Quantum Principal Component Analysis Algorithm} is published recently by He et.~al. (\cite[He, 2021]). It is based on \emph{singular value thresholding} In contrast to the algorithms in this paper their algorithm calculates the significant eigenvalues in respect to a given threshold.
+
+If needed only:
+- yanofsky paper
+- qFT based arithmetic operations
+- quantum algo and circuits for scientifc computing
+
+
+ref: 
+Zhao (2020): Quantum Software Engineering – Landscapes and Horizons (arXiv: 2007.070471v1)
+Braje and Cortese, (2018): Loading Classical Data into a Quantum Computer (arXiv: 1803.01958v1)
+
+
+@misc{yanofsky,
+      title={An Introduction to Quantum Computing},
+      author={Noson S. Yanofsky},
+      year={2007},
+      eprint={0708.0261},
+      archivePrefix={arXiv},
+      primaryClass={quant-ph}
+}
+
+Lokhov et.~al. (2020): Quantum Algortihm Implementations for Beginners (arXiv: 1804.03719v2)
+He et.~al. (2021): A Low Complexity Quantum Principal Component Analysis Algorithm (arXiv: 2010.00831v2)

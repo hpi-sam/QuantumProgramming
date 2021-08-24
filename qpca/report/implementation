@@ -1,0 +1,57 @@
+- this papers approach
+-- from simple qpca to more improved algorithms
+
+Basic algorithm:
+
+The following algorithm is taken from \cite{Lokhov, 2020}. It is limited to $2 ß\times 2$ matrices and has the following steps:
+\begin{itemize}
+  \item classical preprocessing to calculate unitary operation $U_{prep}$
+  \item initialize the quantum circuit
+  \item purify calculation via swap test
+  \item classical post-processing to calculate the eigenvalues
+\end{itemize}
+
+-- maybe a graphic instead of list is better here...
+
+Classical Preprocessing
+
+The algorithm uses a reduced density matrix based approach to translate classical bits into a quantum state. Therefore, the preprocessing consists of the following steps:
+\begin{itemize}
+  \item calculate covariance matrix $\Sigma$ for a given set of features
+  \item normalize the covariance matrix $p = \frac{1}{Tr(\Sigma)} * \Sigma$
+  \item purify normalized covariance matrix $p$
+  \item calculate unitary preparation operation $U_{prep}$
+\end{itemize}
+
+By purifying the normalized covariance matrix ....
+
+-- implementation details here
+
+Initialize Quantum Circuit
+
+The algorithm uses one anchilla qubit and two qubits for the quantum state $|\phi\rlange$ received from the purified $p$. The algorithm uses two copies of $|\phi\rlange$ which adds up to five qubits in total. The anchilla qubit will be initalied in state $|0\rlange$. The quantum states $|\phi\rlange$ and $|\phi*\rlange$ will be initalized with the unitary operation $U_{prep}$. As discussed in the previous paragraph, this operation differs depending on the data set.
+
+-- implementation details here
+
+Purify Calculation
+
+This step implements the swap test. The swap test can be used to compare two quantum states. In case both of the states are identical the probability to measure $|1\lange>$ is $1$ In case both of the states are orthogonal the probability to measure $|1\lange>$ is $\frac{1}{2}$.
+-- Check: states are "identical" or "linear dependend" ?
+
+
+-- implementation details here
+---- cirq Gate + Operation
+------ _decompose_ method
+---- drawback of the Gate + Operaton version -> swap test can work on registers --> gate only works on qubits
+
+Classical Post-Processing
+-- formel here
+-- implementation details here
+
+
+Example 1:
+Example 2:
+
+Problems --> Change to QPE
+
+
