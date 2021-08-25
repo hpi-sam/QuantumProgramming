@@ -1,45 +1,6 @@
 import unittest
-import numpy as np
 from src.classical_processing.post_processing import compute_e1, compute_e2
-
-
-class ExampleDataSetRef19(object):
-    def __init__(self):
-        self._sigma = np.array([[0.380952, 0.573476], [0.573476, 1.29693]])
-        normed_covariance = self._sigma / np.trace(self._sigma)
-        self._purity = np.trace(np.matmul(normed_covariance, normed_covariance))
-
-    def get_sigma(self):
-        return self._sigma
-
-    def get_purity(self):
-        return self._purity
-
-    def get_expected_e1(self):
-        return 1.57286
-
-    def get_expected_e2(self):
-        return 0.105029
-
-
-class ExampleDataSetMain(object):
-    def __init__(self):
-        self._matrix = np.array([[1.5, 0.5], [0.5, 1.5]])
-        self._sigma = np.cov(self._matrix)
-        normed_covariance = self._sigma / np.trace(self._sigma)
-        self._purity = np.trace(np.matmul(normed_covariance, normed_covariance))
-
-    def get_sigma(self):
-        return self._sigma
-
-    def get_purity(self):
-        return self._purity
-
-    def get_expected_e1(self):
-        return 2
-
-    def get_expected_e2(self):
-        return 1
+from src.tests.test_data_sets import ExampleDataSetRef19, ExampleDataSetMain
 
 
 class ComputeE1TestCase(unittest.TestCase):
