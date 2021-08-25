@@ -3,7 +3,6 @@ from cmath import sqrt
 
 
 def compute_e1(sigma, purity):
-    print(purity, sqrt(1-2*(1-purity)))
     result = np.trace(sigma) * (1 + sqrt(1-2*(1-purity))) / 2
     return result
 

@@ -1,12 +1,17 @@
 import cirq
+from cirq import value
 from cirq.ops import raw_types
 
 
+@value.value_equality
 class SwapTestGate(raw_types.Gate):
     def __init__(self, num_qubits=3):
         self._num_qubits = max(0, num_qubits)
 
     def num_qubits(self) -> int:
+        return self._num_qubits
+
+    def _value_equality_values_(self):
         return self._num_qubits
 
     def _decompose_(self, qubits):

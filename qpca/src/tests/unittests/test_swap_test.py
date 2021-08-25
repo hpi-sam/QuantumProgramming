@@ -178,5 +178,15 @@ class SwapTestGateStringRepresentationTestCase(unittest.TestCase):
         self.assertEqual('SwapTest', str(SwapTestGate()))
 
 
+class SwapTestEquivalenceTestCase(unittest.TestCase):
+    def runTest(self):
+        pass
+
+    def test_same_circuits(self):
+        expected = cirq.Circuit(swap_test(cirq.LineQubit(0), cirq.LineQubit(1), cirq.LineQubit(2)))
+        actual = cirq.Circuit(swap_test(cirq.LineQubit(0), cirq.LineQubit(1), cirq.LineQubit(2)))
+        cirq.testing.assert_same_circuits(actual, expected)
+
+
 if __name__ == '__main__':
     unittest.main()
