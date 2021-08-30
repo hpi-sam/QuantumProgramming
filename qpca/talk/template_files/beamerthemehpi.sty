@@ -1,0 +1,52 @@
+\mode<presentation>
+
+%% Basic slide geometry
+% Paper dimensions of standard Powerpoint 16:9 format
+\RequirePackage[orientation=landscape,size=custom,width=25.4,height=14.288,scale=1]{beamerposter}
+% Text margins of HPI slide master
+\setbeamersize{text margin left=1cm,text margin right=0.51cm}
+% Do not center text vertically but start at the top
+\beamer@centeredfalse
+% Do not use navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+\define@key{beamerframe}{t}[true]{% top (default)
+	\beamer@frametopskip=-1pt\relax% Changes here: Remove top margin of frame
+	\beamer@framebottomskip=0pt plus 1fill\relax%
+	\beamer@frametopskipautobreak=\beamer@frametopskip\relax%
+	\beamer@framebottomskipautobreak=\beamer@framebottomskip\relax%
+}
+\define@key{beamerframe}{c}[true]{% center
+	\beamer@frametopskip=0pt plus 1fill\relax%
+	\beamer@framebottomskip=0pt plus 1fill\relax%
+	\beamer@frametopskipautobreak=\beamer@frametopskip\relax%
+	\beamer@framebottomskipautobreak=\beamer@framebottomskip\relax%
+}
+
+%% Additional packages
+% Tikz for colored bars and other style elements
+\RequirePackage{tikz}
+\RequirePackage{calc}
+% grffile for dots in image/... file names
+\RequirePackage{grffile}
+
+% etoolbox for conditional elements etc.
+\RequirePackage{etoolbox}
+% boolean flags
+\newbool{fakultaet}
+
+% styling of figure captions
+\RequirePackage[font=scriptsize,labelfont=bf]{caption}
+\captionsetup[figure]{labelformat=empty}
+
+%% Delegate theme definitions
+% inner theme for texts, lists, ...
+\useinnertheme{hpi}
+% outer theme for slide structure
+\useoutertheme{hpi}
+% HPI brand colors
+\usecolortheme{hpi}
+% HPI font
+\usefonttheme{hpi}
+
+\mode<all>

@@ -1,0 +1,52 @@
+\mode<presentation>
+
+% left margin of itemize and enumerate
+\setlength{\leftmargini}{0.7cm}
+
+% itemize
+% On first level: Use a filled square
+\setbeamertemplate{itemize item}{\tikz\fill[hpi-itemize] (0,0) rectangle (1ex,1ex);}
+% On second level: Use a square outline
+\setbeamertemplate{itemize subitem}{\tikz\draw[hpi-itemize] (0,0) rectangle (1ex,1ex);}
+% On third level: Use a dash
+\setbeamertemplate{itemize subsubitem}{\tikz{\useasboundingbox (0,0) rectangle (1ex,1ex);\draw[hpi-itemize] (0,0.6ex) -- (0.5em,0.6ex);}}
+
+% enumerate
+% On first level: Use number
+\setbeamertemplate{enumerate item}{\insertenumlabel.}
+% On second level: Use letter
+\setbeamertemplate{enumerate subitem}{\@alph\insertsubenumlabel)}
+% On third level: Use small roman numbers
+% In the Powerpoint slide master there is a headline format here, but we won't mess with semantics here in the same way
+\setbeamertemplate{enumerate subsubitem}{\romannumeral \insertsubsubenumlabel)}
+
+% amsthm
+\setbeamertemplate{theorems}[ams style]
+\newtheoremstyle{theorem}%
+{}%
+{}%
+{\usebeamerfont{thm/body}\usebeamercolor[fg]{thm/body}}%
+{}%
+{\usebeamerfont{thm/head}\usebeamercolor[fg]{thm/head}}%
+{}%
+{\newline}%
+{}%
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem*{definition*}{Definition}
+\newtheoremstyle{lemma}%
+{}%
+{}%
+{\usebeamerfont{lemma/body}\usebeamercolor[fg]{lemma/body}}%
+{}%
+{\usebeamerfont{lemma/head}\usebeamercolor[fg]{lemma/head}}%
+{}%
+{ }%
+{}%
+\theoremstyle{lemma}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{lemma*}{Lemma}
+
+\mode<all>

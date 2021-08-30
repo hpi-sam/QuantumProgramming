@@ -1,0 +1,54 @@
+\RequirePackage{xcolor}
+
+%% HPI color definitions according to the design manual
+% These do not exactly match the RGB values used in the Powerpoint slide master due to unknown reasons
+\definecolor{hpiyellow}{RGB}{246,168,0}
+\definecolor{hpiorange}{RGB}{221,97,8}
+\definecolor{hpired}{RGB}{177,6,58}
+\definecolor{hpigray}{RGB}{90,96,101}
+\definecolor{hpiblue}{RGB}{0,122,158}
+
+% Additional colors used in Powerpoint template
+\definecolor{hpidarkgray}{RGB}{50,50,50}
+
+
+%% Styles for slide elements
+
+% Title frame
+% Presentation title
+\setbeamercolor*{title}{fg=white}
+% Speaker
+\setbeamercolor*{author}{fg=white}
+% Institute
+\setbeamercolor*{institute}{fg=white}
+
+% Frame title
+\setbeamercolor*{frametitle}{fg=hpigray}
+
+% Itemize
+\colorlet{hpi-itemize}{hpired}
+
+% Enumerate
+\setbeamercolor*{enumerate item}{fg=hpired}
+\setbeamercolor*{enumerate subitem}{fg=hpired}
+\setbeamercolor*{enumerate subsubitem}{fg=hpired}
+
+% Theorems
+\setbeamercolor*{thm/head}{fg=hpired}
+\setbeamercolor*{thm/body}{fg=black}
+\setbeamercolor*{lemma/head}{fg=hpiorange}
+\setbeamercolor*{lemma/body}{fg=black}
+\setbeamercolor*{qed symbol}{fg=black}
+
+% Blocks and Proofs
+\setbeamercolor*{block title}{fg=black}
+
+% Sidebar
+% Speaker
+\setbeamercolor*{author in head/foot}{fg=hpidarkgray}
+% Date
+\setbeamercolor*{date in head/foot}{fg=hpidarkgray}
+% Presentation title
+\setbeamercolor*{title in head/foot}{fg=hpidarkgray}
+% Frame number
+\setbeamercolor*{page number in head/foot}{fg=hpidarkgray}

@@ -1,0 +1,84 @@
+\mode<presentation>
+
+%% General font defintions
+
+% Use neosans as default sans serif font family
+\renewcommand{\sfdefault}{neosans}
+
+% Different font weights for neosans
+\newcommand{\textl}[1]{{\fontseries{l}\selectfont #1}} % light
+\newcommand{\textm}[1]{{\fontseries{m}\selectfont #1}} % medium, same as default weight
+\newcommand{\textsb}[1]{{\fontseries{sb}\selectfont #1}} % semibold
+\newcommand{\textmb}[1]{{\fontseries{mb}\selectfont #1}} % bold, same as \textbf
+\newcommand{\texteb}[1]{{\fontseries{eb}\selectfont #1}} % extra bold
+\newcommand{\textub}[1]{{\fontseries{ub}\selectfont #1}} % ultra bold
+
+% Standard font sizes
+\setbeamerfont*{tiny size}{size*={7}{10}}
+\renewcommand{\tiny}{\usebeamerfont{tiny size}}
+\setbeamerfont*{script size}{size*={9}{12.5}}
+\renewcommand{\scriptsize}{\usebeamerfont{script size}}
+\setbeamerfont*{footnote size}{size*={10.5}{12.5}} % Also sidebar text size
+\renewcommand{\footnotesize}{\usebeamerfont{footnote size}}
+\setbeamerfont*{small size}{size*={12}{17}}
+\renewcommand{\small}{\usebeamerfont{small size}}
+\setbeamerfont*{normal size}{size*={14}{20}} % 14pt and 20pt are the exact values from Powerpoint
+\renewcommand{\normalsize}{\usebeamerfont{normal size}}
+\setbeamerfont*{large size}{size*={20}{25}} % Also title size; ppt has 20pt with single spacing, but 25pt looks more like it
+\renewcommand{\large}{\usebeamerfont{large size}}
+\setbeamerfont*{Large size}{size*={25}{30}}
+\renewcommand{\Large}{\usebeamerfont{Large size}}
+\setbeamerfont*{huge size}{size*={30}{35}}
+\renewcommand{\huge}{\usebeamerfont{huge size}}
+\setbeamerfont*{Huge size}{size*={40}{50}}
+\renewcommand{\Huge}{\usebeamerfont{Huge size}}
+
+%% Styles for slide elements
+
+% Use standard latex font for formulas
+\beamer@suppressreplacementstrue
+
+% Title frame
+% Presentation title
+\setbeamerfont*{title}{parent=large size}
+% Speaker
+\setbeamerfont*{author}{parent=normal size}
+% Institute
+\setbeamerfont*{institute}{parent=normal size}
+
+% Frame title
+\setbeamerfont*{frametitle}{parent=large size}
+
+% Standard frame text
+% This is how it should work:
+\setbeamerfont*{normal text}{parent=normal size, shape=\upshape, series=\mdseries, family=\sffamily}
+% But according to the manual this beamer font is currently ignored, thus we need to do:
+\AtBeginDocument{\usebeamerfont{normal text}}
+\renewcommand*{\normalfont}{\usebeamerfont{normal text}}
+
+% Itemize and enumerate
+% Those elements use the same size as normal text
+\setbeamerfont*{itemize/enumerate body}{parent=normal text}
+\setbeamerfont*{itemize/enumerate subbody}{parent=normal text}
+\setbeamerfont*{itemize/enumerate subsubbody}{parent=normal text}
+
+% Theorems
+\setbeamerfont*{thm/head}{parent=normal size}
+\setbeamerfont*{thm/body}{parent=normal text}
+\setbeamerfont*{lemma/head}{parent=normal size}
+\setbeamerfont*{lemma/body}{parent=normal text}
+
+% Blocks and Proofs
+\setbeamerfont*{block title}{parent=normal size,series=\bfseries}
+
+% Sidebar
+% Speaker
+\setbeamerfont*{author in head/foot}{parent=footnote size}
+% Date
+\setbeamerfont*{date in head/foot}{parent=footnote size}
+% Presentation title
+\setbeamerfont*{title in head/foot}{parent=footnote size,series=\bfseries}
+% Frame number
+\setbeamerfont*{page number in head/foot}{parent=footnote size,series=\bfseries}
+
+\mode<all>

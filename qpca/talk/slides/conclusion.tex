@@ -1,0 +1,41 @@
+\begin{frame}[title-small={color=hpiorange, bg=none, text=Conclusion}]
+	\maketitle
+\end{frame}
+
+
+\begin{frame}{Conclusion}
+  \begin{minipage}{1.0\textwidth}
+    \begin{itemize}
+      \item different algorithms for qPCA have been proposed by research community $\rightarrow$ often additional constraints for practical implementing
+      \begin{itemize}
+        \item types of limitations discussed: number of qubits, qubit layout, circuit depth, circuit noise
+      \end{itemize}
+      \item integration: quantum state initialization is a non-trivial task when implementing and testing quantum algorithms
+      \begin{itemize}
+        \item three techniques discussed: classical register, density matrix, amplitude amplification
+      \end{itemize}
+      \item design: support through the different high-level libraries
+      \begin{itemize}
+        \item python cirq library discussed: circuit, operation, gate, value equality, testing
+      \end{itemize}
+    \end{itemize}
+  \end{minipage}
+\end{frame}
+
+
+\begin{frame}{Conclusion}
+  \begin{minipage}{1.0\textwidth}
+    \begin{itemize}
+      \item implementation: support through the different high-level libraries
+      \begin{itemize}
+        \item python unit-testing and end-to-end component testing discussed: classical assertions, circuit simulation
+        \item not discussed: other types of testing for quantum algorithms, e.~g. projection based runtime assertions
+        \item not discussed: error code correction to address noise or mixed states
+      \end{itemize}
+      \item maintenance: enhancements on the simple qPCA algorithm applied
+      \begin{itemize}
+        \item types of effects / changes discussed: preprocessing, post-processing, testing
+      \end{itemize}
+    \end{itemize}
+  \end{minipage}
+\end{frame}
