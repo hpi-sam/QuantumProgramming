@@ -27,7 +27,7 @@ class EqualStatesTestCase(unittest.TestCase):
                 circuit.append(cirq.measure(qubits[0], key='results'))
 
                 sample_results = simulate(circuit, repetitions, 'results')
-                self.assertEqual(expected, sample_results[0])
+                self.assertEqual(expected, sample_results['histogram'][0])
 
 
 class OrthogonalStatesTestCase(unittest.TestCase):
@@ -51,11 +51,11 @@ class OrthogonalStatesTestCase(unittest.TestCase):
                 circuit.append(cirq.measure(qubits[0], key='results'))
 
                 sample_results = simulate(circuit, repetitions, 'results')
-                self.assertAlmostEqual(expected, sample_results[0], delta=expected * 0.06)
+                self.assertAlmostEqual(expected, sample_results['histogram'][0], delta=expected * 0.06)
 
 
 class ComputeProbabilityTestCase(unittest.TestCase):
-    def runTes(self):
+    def runTest(self):
         self.test_compute_probability_orthogonal_states_on_single_qubits()
 
     def test_compute_probability_orthogonal_states_on_single_qubits(self):
@@ -70,7 +70,7 @@ class ComputeProbabilityTestCase(unittest.TestCase):
         circuit.append(cirq.measure(qubits[0], key='results'))
 
         sample_results = simulate(circuit, repetitions, 'results')
-        actual = compute_swap_test_probability(repetitions, sample_results)
+        actual = compute_swap_test_probability(repetitions, sample_results['histogram'])
         self.assertAlmostEqual(expected, actual, delta=expected * 0.06)
 
 

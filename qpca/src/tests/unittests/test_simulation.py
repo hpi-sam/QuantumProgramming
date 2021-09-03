@@ -5,7 +5,7 @@ import cirq
 from src.simulation.simulation import simulate
 
 
-class SimulationTestCase(unittest.TestCase):
+class SimulationHistogramTestCase(unittest.TestCase):
     def runTest(self):
         pass
 
@@ -15,7 +15,7 @@ class SimulationTestCase(unittest.TestCase):
         qubits = cirq.LineQubit.range(0, 1)
         circuit.append(cirq.measure(qubits[0], key='results'))
         actual = simulate(circuit, 100, 'results')
-        self.assertDictEqual(expected, actual)
+        self.assertDictEqual(expected, actual['histogram'])
 
     def test_run_simulation_for_given_repetition(self):
         parameters = {10, 100}
@@ -27,7 +27,7 @@ class SimulationTestCase(unittest.TestCase):
                 circuit.append(cirq.X(qubits[0]))
                 circuit.append(cirq.measure(qubits[0], key='results'))
                 actual = simulate(circuit, p, 'results')
-                self.assertDictEqual(expected, actual)
+                self.assertDictEqual(expected, actual['histogram'])
 
     def test_run_simulation_for_given_measurement_key(self):
         parameters = {'some', 'key'}
@@ -40,4 +40,4 @@ class SimulationTestCase(unittest.TestCase):
                 circuit.append(cirq.X(qubits[0]))
                 circuit.append(cirq.measure(qubits[0], key=p))
                 actual = simulate(circuit, repetitions, p)
-                self.assertDictEqual(expected, actual)
+                self.assertDictEqual(expected, actual['histogram'])

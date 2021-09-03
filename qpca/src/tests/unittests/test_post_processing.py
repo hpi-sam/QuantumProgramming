@@ -11,7 +11,7 @@ class ComputeE1TestCase(unittest.TestCase):
     def test_compute_data_set_ref19(self):
         test_data = ExampleDataSetRef19()
 
-        expected = test_data.get_expected_e1()
+        expected = test_data.expected[0]
         actual = compute_e1(test_data.get_sigma(), test_data.get_purity())
         self.assertAlmostEqual(expected, actual, delta=0.00001)
 
@@ -20,7 +20,7 @@ class ComputeE1TestCase(unittest.TestCase):
 
         test_data = ExampleDataSetMain()
 
-        expected = test_data.get_expected_e1()
+        expected = test_data.expected[0]
         actual = compute_e1(test_data.get_sigma(), test_data.get_purity())
         self.assertAlmostEqual(expected, actual, delta=0.00001)
 
@@ -33,7 +33,7 @@ class ComputeE2TestCase(unittest.TestCase):
     def test_compute_data_set_ref19(self):
         test_data = ExampleDataSetRef19()
 
-        expected = test_data.get_expected_e2()
+        expected = test_data.expected[1]
         actual = compute_e2(test_data.get_sigma(), test_data.get_purity())
         self.assertAlmostEqual(expected, actual, delta=0.00001)
 
@@ -42,7 +42,7 @@ class ComputeE2TestCase(unittest.TestCase):
 
         test_data = ExampleDataSetMain()
 
-        expected = test_data.get_expected_e2()
+        expected = test_data.expected[1]
         actual = compute_e2(test_data.get_sigma(), test_data.get_purity())
         self.assertAlmostEqual(expected, actual, delta=0.00001)
 

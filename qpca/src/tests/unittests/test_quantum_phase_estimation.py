@@ -2,30 +2,8 @@ import unittest
 import cirq
 from cirq.ops import raw_types
 from src.operation.quantum_phase_estimation import QPE
-
-
-def get_test_data_2_times_1_x():
-    return [2, 1, cirq.X, """
-0: ───H───@───────────qft[norev]^-1───
-          │           │
-1: ───H───┼───@───@───#2──────────────
-          │   │   │
-2: ───────X───X───X───────────────────
-        """]
-
-
-def get_test_data_3_times_2_swap():
-    return [3, 2, cirq.SWAP, """
-0: ───H───@───────────────────────────qft[norev]^-1───
-          │                           │
-1: ───H───┼───@───@───────────────────#2──────────────
-          │   │   │                   │
-2: ───H───┼───┼───┼───@───@───@───@───#3──────────────
-          │   │   │   │   │   │   │
-3: ───────×───×───×───×───×───×───×───────────────────
-          │   │   │   │   │   │   │
-4: ───────×───×───×───×───×───×───×───────────────────
-        """]
+from src.tests.test_data_sets import ExampleDataSetQiskitTextbookTGate3CountQubits, \
+    ExampleDataSetQiskitTextbookPGate5CountQubits
 
 
 class QPEInitTestCase(unittest.TestCase):
@@ -66,16 +44,17 @@ class QPEDecomposeTestCase(unittest.TestCase):
                 cirq.testing.assert_same_circuits(actual, expected)
 
     def test_has_diagram(self):
-        parameter = [get_test_data_2_times_1_x, get_test_data_3_times_2_swap]
+        parameter = [ExampleDataSetQiskitTextbookTGate3CountQubits, ExampleDataSetQiskitTextbookPGate5CountQubits]
 
-        for f in parameter:
-            with self.subTest(i=f()):
-                params = f()
-                register_1 = cirq.LineQubit.range(params[0])
-                register_2 = cirq.LineQubit.range(params[0], params[0] + params[1])
-                circuit = cirq.Circuit()
-                circuit.append(cirq.decompose_once(QPE(register_1, register_2, params[2])))
-                cirq.testing.assert_has_diagram(circuit, params[3])
+        for p in parameter:
+            with self.subTest(i=p):
+                dataset = p()
+                circuit = dataset.eigenstate
+                circuit.append(cirq.decompose_once(
+                    QPE(dataset.count_register, dataset.eigenstate_register, dataset.operation)
+                    )
+                )
+                cirq.testing.assert_has_diagram(circuit, dataset.get_str_diagram())
 
 
 class QPEQubitTestCase(unittest.TestCase):
