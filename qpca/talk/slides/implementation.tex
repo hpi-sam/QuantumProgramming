@@ -15,7 +15,7 @@
 \end{frame}
 
 
-\begin{frame}{Circuit Initialization - State Purification}
+\begin{frame}{Circuit Initialization - State Purification \& Schmidt decomposition}
   \begin{minipage}{1.0\textwidth}
     \begin{itemize}
       \item idea: describe a classical state as pure or mixed quantum state via density operation $\rho$
@@ -28,8 +28,17 @@
         \item describe entangled states
         \item state purification: system $A$ in a mixed state $\rightarrow$ a composed system $AB$ can be found that complies with the reduced density operation $\rho_{A}$ and $AB$ in a pure state
       \end{itemize}
+			\item state preparation: use Schmidt decomposition to compute the unitary preparion operation:
+			\begin{itemize}
+				\item $U_{prep} = (U_A \otimes U_B) CNOT_{AB} (U_{A}^{'} \otimes I_B )$
+			\end{itemize}
     \end{itemize}
   \end{minipage}
+	\begin{minipage}{1.0\textwidth}
+    \centering
+    \includegraphics[width=0.3\textwidth]{../assets/schmidt_decomposition_main-ref19.png}
+  \end{minipage}
+	\footnote{[Lokho2020], [Niels2010]}
 \end{frame}
 
 
@@ -49,7 +58,7 @@
     \centering
     \includegraphics[width=0.8\textwidth]{../assets/grover_steps.png}
   \end{minipage}
-  \footnote{\url{https://qiskit.org/textbook/ch-algorithms/grover.html}}
+  \footnote{[Daski2015], \url{https://qiskit.org/textbook/ch-algorithms/grover.html}}
 \end{frame}
 
 
@@ -98,10 +107,9 @@
       \end{itemize}
     \end{itemize}
   \end{minipage}%
-  \begin{minipage}{0.5\textwidth}
-    \begin{itemize}
-      \item (code snippet here?)
-    \end{itemize}
+	\begin{minipage}{0.5\textwidth}
+    \centering
+    \includegraphics[width=1.0\textwidth]{../assets/code-snippet_simple_circuit.png}
   \end{minipage}
 \end{frame}
 
@@ -141,10 +149,9 @@
       \item end-to-end testing: simulate circuit $\rightarrow$ find acceptable delta between expected and actual result
     \end{itemize}
   \end{minipage}%
-  \begin{minipage}{0.5\textwidth}
-    \begin{itemize}
-      \item (code snipped swap test and swap test gate here?)
-    \end{itemize}
+	\begin{minipage}{0.5\textwidth}
+    \centering
+    \includegraphics[width=1.0\textwidth]{../assets/code-snippet_swap-gate.png}
   \end{minipage}
 \end{frame}
 
@@ -158,7 +165,7 @@
         \item $e_2 = Tr(\Sigma) \ast (1 - \sqrt{1 - 2 (1 - P)}) / 2$
       \end{itemize}
       \item this formula is specific for $2 \times 2$ matrices and maybe even mixed states
-      \item example from [He2021]: formula does not calculate eigenvalues correctly 
+      \item example from [He2021]: formula does not calculate eigenvalues correctly
     \end{itemize}
   \end{minipage}
 \end{frame}
