@@ -1,0 +1,17 @@
+\noindent
+[Summarize the results in respect to the investigated question, whether current tools and techniques proposed by the research community can be applied to build a robust, scale-able and flexible quantum PCA solution.]
+
+\subsection{Challenges}
+\label{subsec:challenges}
+A big challenge lies in the initialization of a quantum state. In section ~\ref{sec:background} three methods to initialize multiple qubit states have been mentioned and all of them have their specific challenges. Bit-wise implementations require properly applied discard operations as the number of qubits needed to encode the data is defined by the classical bit-wise representation of it. State purification requires an algorithm to find the composed pure state in respect to the density matrix of a given data set. If the required methods are not implemented by the used libraries this step has to be done within the project. This adds an additional layer of potential coding errors that can be introduced to the project. It also adds a layer of potential blocking elements as developers not only have to familiarize themselves with the underlying theoretical concepts but also its correct practical application. [amplitude amplification: underestimation]
+[learned lesson]
+
+Due to the physical attributes of quantum hardware quantum based solutions need to be robust in respect to information entropy. In 1948, Shannon addressed the differences in discrete and continuous communication and the challenges introduced from noise. The paper itself is out of scope for this project but it lead to different research on \emph{error codes} and \emph{error code correction} which is a challenge that comes with quantum based solutions. Therefore, reducing a circuits complexity when possible is an active part when designing and implementing a quantum based solution. This contradicts best practices in classical programming where hardware details are abstracted from the solution implementation details. In classical programming developers are therefore allowed to focus on solving their problem on a more general approach. Whereas in quantum programming qubit layout or gate decomposition are still an active part of the algorithm discussion as can be seen in \cite{Lokho_2020}.
+
+The concept of noise and the fact that quantum computing deals with probabilities lead to a challenge regarding testing. As results from a quantum component are measurements they have to be evaluated in respect with a certain level of error tolerance. 
+
+\subsection{Outlook}
+\label{subsec:outlook}
+* quantity over quality -> look for examples and read code; practice state initialization
+* engage with community -> enhance set of docs and tutorials; enhance the standard; get immediate feedback from other developers
+* testing: Types of Tests that you would recommend (2 paragraphs)
