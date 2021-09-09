@@ -82,9 +82,9 @@ class ExampleDataSetRef19(BaseExampleDataSetQPE):
         # print(V, V[0][0]**2 + V[1][1]**2)
         circuit = cirq.Circuit()
         # circuit.append(cirq.MatrixGate(np.linalg.inv(U))(self._eigenstate_reg[0]))
-        circuit.append(cirq.CNOT(self._eigenstate_reg[0], self._eigenstate_reg[1]))
-        circuit.append(cirq.MatrixGate(U)(self._eigenstate_reg[0]))
-        circuit.append(cirq.MatrixGate(V)(self._eigenstate_reg[1]))
+        # circuit.append(cirq.CNOT(self._eigenstate_reg[0], self._eigenstate_reg[1]))
+        # circuit.append(cirq.MatrixGate(U)(self._eigenstate_reg[0]))
+        # circuit.append(cirq.MatrixGate(V)(self._eigenstate_reg[1]))
         # print(circuit)
         return circuit
 
@@ -127,10 +127,10 @@ class ExampleDataSetMain(BaseExampleDataSetQPE):
         #print(B, np.matmul(B, np.linalg.inv(B)))
         # print(V, V[0][0]**2 + V[1][1]**2)
         circuit = cirq.Circuit()
-        circuit.append(cirq.MatrixGate(np.linalg.inv(U))(self._eigenstate_reg[0]))
-        circuit.append(cirq.CNOT(self._eigenstate_reg[0], self._eigenstate_reg[1]))
-        circuit.append(cirq.MatrixGate(U)(self._eigenstate_reg[0]))
-        circuit.append(cirq.MatrixGate(V)(self._eigenstate_reg[1]))
+        # circuit.append(cirq.MatrixGate(np.linalg.inv(U))(self._eigenstate_reg[0]))
+        # circuit.append(cirq.CNOT(self._eigenstate_reg[0], self._eigenstate_reg[1]))
+        # circuit.append(cirq.MatrixGate(U)(self._eigenstate_reg[0]))
+        # circuit.append(cirq.MatrixGate(V)(self._eigenstate_reg[1]))
         # print(circuit)
         return circuit
 

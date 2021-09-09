@@ -2,7 +2,7 @@ import unittest
 
 
 def load_suite():
-    suite = unittest.defaultTestLoader.discover(start_dir='src.tests', pattern='test_*.py', top_level_dir=None)
+    suite = unittest.defaultTestLoader.discover(start_dir='.', pattern='test_*.py', top_level_dir=None)
     return suite
 
 
