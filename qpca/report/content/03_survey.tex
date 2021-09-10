@@ -4,35 +4,49 @@ This section discusses the implementation process of a beginner-friendly version
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{assets/survey_quantum_software_lifecycle.png}
-  \caption{A quantum software life cycle. \cite{Zhao_2020}}
+  \caption{A quantum software life cycle. Figure taken from \cite{Zhao_2020}.}
   \label{fig:lifecycle}
 \end{figure}
 
-As stated in the introduction in this paper the question whether current tools and techniques proposed by the research community can be applied to build a robust, scale-able and flexible quantum PCA solution is investigated. Therefore, these three qualities will be taken as non-function requirements. As a functional requirement the problem of feature reduction on high dimensional data sets is taken.
+As a functional requirement the problem of feature reduction on high dimensional data sets is taken. In this case \enquote{high} dimensional includes at least two dimensions and implies to not be restricted to it if the amount of availble qubits of the underlying hardware allows it. E.~g. the numerical examples of the quantum PCA implementations referenced in the introduction include $4 \times 4$ matrices as well. As for software qualities the support fot the following three will be investigated:
+\begin{description}
+  \item [Testability] Different test strategies have been surveyed by \cite{Zhao_2020}. Can they be applied out of the box? Which support is given by the chosen library / libraries?
+  \item [Scalability] How be able to scale up once larger amounts of qubits are available?
+  \item [Flexibility] How can implementation details be exchanged or enhanced flexible to ensure maintenance and openness to future changes?
+\end{description}
 
 The following two design decisions are made: (1) the PCA will be used to tackle the problem of feature reduction and (2) the quantum based part of the solution will be embedded into a larger classical program. For the quantum based PCA a simple \emph{Swap Test} based solution as proposed by \cite{Lokho_2020} is used. The authors state that their solution is limited to work on $2 \times 2$ feature matrices. This is a strong limitation in respect to the defined non-functional requirements. The idea is to use this solution to identify and design test cases early in the implementation phase and to enhance the solution by exchanging the swap test with the \emph{Quantum Phase Estimation} (QPE) in a second step.
 
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{assets/survey_algorithm_main-ref19.png}
-  \caption{A simple swap test based PCA. \cite{Lokho_2020}}
+  \caption{A simple swap test based PCA. Figure taken from \cite{Lokho_2020}.}
   \label{fig:mainref19}
 \end{figure}
 
-The overall layout of the swap test based solution is illustrated in figure ~\ref{fig:mainref19}. The authors of \cite{Lokho_2020} suggest, to encode the quantum state via density operation and Schmidt decomposition. All necessary step are part of the classical pre-processing. To interpret the measurements from the quantum circuit and to calculate the eigenvalues is part of the classical post-processing. To be able to exchange the swap test with QPE easily, these steps will be encapsulated into an operation.
+The overall layout of the swap test based solution is illustrated in figure ~\ref{fig:mainref19}. The authors of \cite{Lokho_2020} suggest, to encode the quantum state via density operation and Schmidt decomposition. All necessary steps are part of the classical pre-processing. To interpretate the measurements from the quantum circuit and to calculate the eigenvalues is part of the classical post-processing. To be able to exchange the swap test with QPE easily, both steps will be encapsulated into a respective operation.
 
-For implementation the following libraries are used: python, unittest, numpy, and cirq. As parts of the solution is classical, classical unittests are applied for those steps respectively. The cirq library also provides support for unit testing with their \emph{cirq.testing} module. Especially the following two assertions are used multiple times during this project:
+For implementation the following libraries are used: python, unittest, numpy, and cirq. As parts of the solution are classical, classical unittests are applied for those steps respectively. The cirq library also provides support for unit testing with their \emph{cirq.testing} module. Especially the following two assertions are used multiple times during this project:
 \begin{itemize}
   \item assert\_same\_circuits $\rightarrow$ tests if two circuits are equivalent to each other
   \item assert\_has\_diagram $\rightarrow$ tests the text representation
 \end{itemize}
 
-The swap test is an operation to check the level of difference of two quantum states. It takes two quantum states as input, each represent by $n$ qubits. It outputs the level of equality of the two states: (1) if both states are orthogonal to each other the probability to measure $0$ is $\frac{1}{2}$ or (2) if both states are equal to each other the probability to measure $0$ is $1$. This paper follows the algorithm proposed on the respective article on \emph{Wikipedia}.\cite{Wp_Swap}
+The swap test is an operation to check the level of difference of two quantum states. It takes two quantum states as input, each represented by $n$ qubits. It outputs the level of equality of the two states: (1) if both states are orthogonal to each other the probability to measure $0$ is $\frac{1}{2}$ or (2) if both states are equal to each other the probability to measure $0$ is $1$. This paper follows the algorithm proposed on the respective article on \emph{Wikipedia}. \cite{Wp_Swap}
 
-The cirq implementation of \emph{Quantum Fourier Transformation} \cite{Cirq_Qft} is used as a reference implementation. This decision is not ideal since it implements the swap test algorithm as a \emph{cirq.raw\_types.Gate} type and provides the corresponding operation as a wrapper function. Since gates only know qubits but not register of qubits, the swap test composition makes some assumptions on how qubits are entered into the gate.
+The cirq implementation of \emph{Quantum Fourier Transformation} \cite{Cirq_Qft} is used as a reference implementation. This decision is not ideal since it implements the swap test algorithm as a \emph{cirq.raw\_types.Gate} type and provides the corresponding operation as a wrapper function. Since gates only know qubits but not register of qubits, this papers swap test composition makes some assumptions on how qubits are entered into the gate.
 
-For end-to-end testing the following two data sets are used [reference data sets here] [handling measurement errors]
+For end-to-end testing the following two data sets are used:
+\begin{itemize}
+  \item PCA example from \cite{Lokho_2020}:
+    \begin{itemize}
+      \item feature set $X = (4, 3, 4, 4, 3, 3, 3, 3, 4, 4, 4, 5, 4, 3, 4)$
+      \item feature set $Y = (3028, 1365, 2726, 2538, 1318, 1693, \\ 1412, 1632, 2875, 3564, 4412, 4444, 4278, 3064, 3857)$
+    \end{itemize}
+  \item Numerical example from \cite{He_2021}: $A = \begin{bmatrix} 1.5 & 0.5 \\ 0.5 & 1.5 \end{bmatrix}$
+\end{itemize}
+So far the testcases are run on a simulator only. This already introduces the challenge to handle a certain level of uncertainty in the measurement results. The actual result will only be almost equal to the expected result up to a certain delta. The cirq library also supports noise simulation but this is not yet integrated in this papers current test suite.
 
 As an enhancement to the current solution the swap test operation will be exchanged with QPE. The qiskit textbook states that the \enquote{objective of the algorithm is the following: Given a unitary operator $U$, the algorithm estimates $\theta$ in $U|\psi\rangle = e^{2\pi i\theta}|\psi\rangle$. Here $|\psi\rangle$ is an eigenvector and $e^{2\psi i\theta}$ is the corresponding eigenvalue.}\cite{Qtb_Qpe} This paper follows the algorithm proposed on the referenced qiskit textbook article. It is implemented as a \emph{cirq.raw\_types.Operation} type.
 
-Exchanging the swap test with the QPE overcomes the strict limitation to $2 \times 2$ feature matrices. It also is more flexible in respect to further improvements already proposed by the research community. E.~g. a state-to-the-art quantum PCA algorithm proposed by \cite{He_2021} includes a quantum based singular value thresholding step to only compute the $n$ most relevant eigenvalues. Therefore this enhancement supports the maintenance of the code. On the other hand it highlights the tight relationship between the quantum parts of the solution and classical pre-processing and post-processing respectively. Further implications are discussed in section ~\ref{sec:discussion}.
+Exchanging the swap test with the QPE overcomes the limitation to $2 \times 2$ feature matrices. It also is more flexible in respect to further improvements already proposed by the research community. E.~g. a state-to-the-art quantum PCA algorithm proposed by \cite{He_2021} includes a quantum based singular value thresholding step to only compute the $n$ most relevant eigenvalues. Therefore this enhancement supports the maintenance of the code. On the other hand it highlights the tight relationship between the quantum parts of the solution and classical pre-processing and post-processing respectively.
