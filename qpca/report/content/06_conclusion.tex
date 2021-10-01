@@ -1,5 +1,3 @@
-Summary of findings (1 paragraph)
-Future work suggested (1 paragraph)
+During this project two simple quantum based PCA algorithms have been implemented and especially quantum state initialization is a non-trivial case. Developers may need to invest to gain further experience in quantum computing to come up with solutions to handle arbitrary input data, in this papers case arbitrary feature matrices. Different algorithms may come with additional constrains as the swap test solution is limited to $2 \times 2$ matrices or QPE might need to handle different levels of certainty. With respect to design, implementation and test the chosen library (cirq) already supports developers with a couple of standard functionality. More advanced and state-to-the-art proposal like \cite{He_2021} on the other hand could not be implemented out of the box.
 
-
-% the implementation be platform-agnostic [testcase needed] and
+Therefore, looking into additional steps needed, to implement singular value thresholding might be one interesting direction for future enhancements to this papers implementations. As well as looking into effects that might occur from hardware specific aspects, e.~g. lined vs. grid layout qubit alignment. At which level choosing a quantum based PCA solution over a classical PCA solution to balance out the pre- and post-processing overhead with actual performance benefits, might be the most interesting related question.
