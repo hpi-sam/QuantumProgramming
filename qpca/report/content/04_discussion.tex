@@ -1,0 +1,52 @@
+\noindent
+In the previous section two quantum based PCA algorithms have been implemented by following a quantum engineering life-cycle.
+
+Exchanging the swap test with the QPE prepared the solution to stay \emph{flexible for further enhancements}. For example it gives the opportunity to enhance the solution with singular value thresholding as proposed in \cite{He_2021} in a future step. It also enabled the solution to scale up once larger amounts of qubits are available.
+
+Depending on the concrete data set under evaluation, QPE, on the other hand, will find a solution with \emph{different levels of uncertainty}. In the qiskit textbook \cite{Qtb_Qpe} this was demonstrated with two single qubit examples. The general mitigation strategy is to enhance the amount of counting qubits used by the QPE algorithm. This implies that a larger amount of available qubits does not always translate into larger data sets to be able to be evaluated.
+
+The \emph{choice of libraries} does affect up to which degree or in which areas developers are supported with standard functionality. The same goes for the support in documentation and testing tools. The cirq community does provide support in both areas, they do offer a couple of tutorials to get started and a selection of assertions in the cirq.testing package. For this project, relevant documentation and examples from the qiskit textbook could be transferred as well.
+
+The topic of \emph{robust test suites} has not been evaluated in this project. In fact, even the classical test cases were neither generated nor cover they mutation based aspects. The quantum computing community has investigated in specific quantum based concepts, e.~g. statistical or projection based run-time assertions as surveyed in \cite[pp. 12-13]{Zhao_2020} and discussed in \cite{Huang_2019} and \cite{Li_2019} respectively, that might be of interest in further projects or studies.
+
+\subsection{Challenges}
+\label{subsec:challenges}
+A big challenge lies in the initialization of a quantum state. In section ~\ref{sec:background} three methods to initialize multiple qubits states have been mentioned and all of them have their specifics:
+\begin{itemize}
+    \item Bit-wise implementations require properly applied discard operations as the number of qubits needed to encode the data is defined by the classical bit-wise representation of it.
+    \item State purification requires an algorithm to find the composed pure state in respect to the density matrix of a given data set. If the required methods are not implemented by the used libraries this step has to be done within the project. This adds an additional layer of potential coding errors that can be introduced to the project. It also adds a layer of potential blocking elements as developers not only have to familiarize themselves with the underlying theoretical concepts but also its correct practical application.
+    \item As for amplitude amplification it can become a subject of underestimation as Grover's algorithm is considered a \enquote{basic algorithm}. Calculating the oracle operation will be part of the pre-processing as it depends on the given data set.
+\end{itemize}
+%[learned lesson]
+% simple textbook examples / paper examples
+
+The concept of noise and the fact that quantum computing deals with probabilities lead to a challenge regarding testing. Since results from a quantum component are measurements they have to be evaluated with respect to a certain level of error tolerance.
+%[learned lesson]
+
+\subsection{Threats to validity}
+\label{subsec:threats}
+With respect to this discussion, especially the challenges, it should be stated that the developer's level of experience in quantum programming and quantum mechanics or related subject plays a major factor. For the addressed challenges multiple techniques have been proposed by the research community. By gaining more experience in quantum computing and applying the theoretical concepts the impacts of the named challenges might become less and less powerful.
+
+The tight relationship between the quantum parts of the solution and classical pre-processing and post-processing mentioned at the end of section ~\ref{sec:survey} also needs to be elaborated a little bit further. It has to be stated that the swap test based solution and a QPE based solution are too different by nature:
+\begin{itemize}
+  \item The swap test does not address further constraints on which quantum states it is working on but only calculates the purification. During post-processing the actual eigenvalues have to be calculated via a formula.
+  \item The QPE, on the other hand, expects an eigenvector as an input state and already calculates the eigenvalues. During post-processing they have to be measured only.
+\end{itemize}
+In classical computing developers will face the same challenge and risk breaking interfaces / contracts if the two modules they wish to exchange with each other are too different from each other. In fact, taken the QPE based solution and having a look into the enhancements proposed by \cite{He_2021} suggests that integration as well as test scenarios can be reused. They will need to be enhanced to reflect e.~g. on the additional thresholding parameter $\tau$ or the fact that only values will be measured that hold to $\tau$. But the parts implemented and tested for QPE will remain valid.
+
+\subsection{Outlook}
+\label{subsec:outlook}
+With respect to testing the following additional types of test cases are suggested:
+\begin{description}
+  \item [fuzzing] The QPE not only expects eigenvectors as initial quantum states but also the concrete unitary operation depends on the given data set. Therefore test cases that enter wrong initial states or unitary operations can be created and should be identified as input errors.
+  \item [run-time assertions] To gain more experience in how powerful run-time assertions, e.~g. the mentioned statistical assertions or projection based assertions can be or where their limitations are. With the current test setup this paper can't contribute any statements on this subject yet.
+  \item [noise] To address noise or mixed states and to come up with meaningful error code corrections as this subject has not been investigated in this paper but is essential in quantum programming.
+  \item [real device] Run test cases with real quantum hardware in the background not only a simulator. For small scenarios like the $2 \times 2$ matrices this can be done these days already.
+\end{description}
+
+In respect to the addressed challenges and threats to validity the following mitigation strategies are suggested:
+\begin{description}
+  \item [Quantity over quality] By reading other peoples code and by reading of it a lot one will be exposed to different tricks and techniques that have been established already.
+  \item [Engage with the community] By actively engaging with other developers feedback from more experienced developers can be gained. Proposing (small) enhancements to a library of choice also will help other developers in the future. As an example: the cirq community already offers an example implementation for modular addition and multiplication. Taking a look into \cite{Sahin_2020} these examples may can be enhanced with non-modular addition and multiplication to be able to work with signed integer input as well.
+\end{description}
+

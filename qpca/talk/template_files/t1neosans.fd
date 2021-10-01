@@ -1,0 +1,51 @@
+\ProvidesFile{t1neosans.fd}
+\DeclareFontFamily{T1}{neosans}{}
+
+\DeclareFontShape{T1}{neosans}{l}{n}{ <-> NeoSansLight}{}
+\pdfmapline{+NeoSansLight\space <NeoSansLight.ttf\space <T1-WGL4.enc}
+\DeclareFontShape{T1}{neosans}{l}{it}{ <-> NeoSansLightItalic}{}
+\pdfmapline{+NeoSansLightItalic\space <NeoSansLightItalic.ttf\space <T1-WGL4.enc}
+\DeclareFontShape{T1}{neosans}{l}{sc}{ <-> NeoSansLightSc}{}
+\pdfmapline{+NeoSansLightSc\space <NeoSansLightSc.ttf\space <T1-WGL4.enc}
+
+\DeclareFontShape{T1}{neosans}{m}{n}{ <-> NeoSans}{}
+\pdfmapline{+NeoSans\space <NeoSans.ttf\space <T1-WGL4.enc}
+\DeclareFontShape{T1}{neosans}{m}{it}{ <-> NeoSansItalic}{}
+\pdfmapline{+NeoSansItalic\space <NeoSansItalic.ttf\space <T1-WGL4.enc}
+\DeclareFontShape{T1}{neosans}{m}{sc}{ <-> NeoSansSc}{}
+\pdfmapline{+NeoSansSc\space <NeoSansSc.ttf\space <T1-WGL4.enc}
+
+\DeclareFontShape{T1}{neosans}{sb}{n}{ <-> NeoSansMedium}{}
+\pdfmapline{+NeoSansMedium\space <NeoSansMedium.ttf\space <T1-WGL4.enc}
+\DeclareFontShape{T1}{neosans}{sb}{it}{ <-> NeoSansMediumItalic}{}
+\pdfmapline{+NeoSansMediumItalic\space <NeoSansMediumItalic.ttf\space <T1-WGL4.enc}
+\DeclareFontShape{T1}{neosans}{sb}{sc}{ <-> NeoSansMediumSc}{}
+\pdfmapline{+NeoSansMediumSc\space <NeoSansMediumSc.ttf\space <T1-WGL4.enc}
+
+\DeclareFontShape{T1}{neosans}{mb}{n}{ <-> NeoSansBold}{}
+\pdfmapline{+NeoSansBold\space <NeoSansBold.ttf\space <T1-WGL4.enc}
+\DeclareFontShape{T1}{neosans}{mb}{it}{ <-> NeoSansBoldItalic}{}
+\pdfmapline{+NeoSansBoldItalic\space <NeoSansBoldItalic.ttf\space <T1-WGL4.enc}
+\DeclareFontShape{T1}{neosans}{mb}{sc}{ <-> NeoSansBoldSc}{}
+\pdfmapline{+NeoSansBoldSc\space <NeoSansBoldSc.ttf\space <T1-WGL4.enc}
+
+\DeclareFontShape{T1}{neosans}{eb}{n}{ <-> NeoSansBlack}{}
+\pdfmapline{+NeoSansBlack\space <NeoSansBlack.ttf\space <T1-WGL4.enc}
+\DeclareFontShape{T1}{neosans}{eb}{it}{ <-> NeoSansBlackItalic}{}
+\pdfmapline{+NeoSansBlackItalic\space <NeoSansBlackItalic.ttf\space <T1-WGL4.enc}
+\DeclareFontShape{T1}{neosans}{eb}{sc}{ <-> NeoSansBlackSc}{}
+\pdfmapline{+NeoSansBlackSc\space <NeoSansBlackSc.ttf\space <T1-WGL4.enc}
+
+\DeclareFontShape{T1}{neosans}{ub}{n}{ <-> NeoSansUltra}{}
+\pdfmapline{+NeoSansUltra\space <NeoSansUltra.ttf\space <T1-WGL4.enc}
+\DeclareFontShape{T1}{neosans}{ub}{it}{ <-> NeoSansUltraItalic}{}
+\pdfmapline{+NeoSansUltraItalic\space <NeoSansUltraItalic.ttf\space <T1-WGL4.enc}
+\DeclareFontShape{T1}{neosans}{ub}{sc}{ <-> NeoSansUltraSc}{}
+\pdfmapline{+NeoSansUltraSc\space <NeoSansUltraSc.ttf\space <T1-WGL4.enc}
+
+\DeclareFontShape{T1}{neosans}{bx}{n}{<->ssub * neosans/mb/n}{}
+\DeclareFontShape{T1}{neosans}{b}{n}{<->ssub * neosans/bx/n}{}
+\DeclareFontShape{T1}{neosans}{bx}{it}{<->ssub * neosans/mb/it}{}
+\DeclareFontShape{T1}{neosans}{b}{it}{<->ssub * neosans/bx/it}{}
+\DeclareFontShape{T1}{neosans}{bx}{sc}{<->ssub * neosans/mb/sc}{}
+\DeclareFontShape{T1}{neosans}{b}{sc}{<->ssub * neosans/bx/sc}{}

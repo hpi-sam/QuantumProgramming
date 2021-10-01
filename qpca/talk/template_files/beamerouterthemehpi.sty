@@ -1,0 +1,221 @@
+\mode<presentation>
+
+% Slide background
+\defbeamertemplate*{background}{hpi}{
+	% Slide header: yellow and orange line, logo
+	% Magic numbers are taken from the Powerpoint slide master
+	\begin{tikzpicture}
+		% Draw on whole slide
+		\useasboundingbox (0,0) rectangle (\the\paperwidth,\the\paperheight);
+		% Thick yellow line
+		\fill[hpiyellow] (0.49cm, \the\paperheight) rectangle (\the\paperwidth - 4.8cm,\the\paperheight - 0.3cm);
+		% Thin orange line
+		\fill[hpiorange] (0.49cm, \the\paperheight - 2.87cm) rectangle (\the\paperwidth - 4.8cm,\the\paperheight - 2.94cm);
+	\end{tikzpicture}
+}
+\defbeamertemplate{background}{empty}{}
+
+% Ensures text is aligned by its base line and not the beard line
+\tikzset{
+	bottomalign/.style={
+		execute at begin node={\vphantom{Ag}},
+		execute at end node={\vphantom{Ag}},
+	}
+}
+
+% Frame title between yellow and orange line
+\defbeamertemplate*{frametitle}{hpi}[1][]
+{
+	\vskip0.3cm % Move past yellow line
+	\vskip-1pt % Remove strange 1pt extra margin
+	\begin{tikzpicture}
+		\useasboundingbox (0, 0) rectangle (19.1cm, 2.58cm);
+		\node[bottomalign,anchor=south west,text width=19.1cm,align=flush left,inner sep=0pt] at (0, 0.5cm) {\usebeamercolor[fg]{hpigray}\insertframetitle};
+	\end{tikzpicture}
+	\vskip-0.25em % remove after-title-spacing
+	\vskip0.57cm % move frame content below orange line
+}
+\defbeamertemplate{frametitle}{empty}{}
+
+% These special insertshort... commands are needed to support line breaks
+\makeatletter
+\newcommand\hpiinsertshorttitle{%
+	\hyperlinkpresentationstart{\beamer@shorttitle}%
+}
+\newcommand\hpiinsertshortauthor{%
+	\beamer@shortauthor%
+}
+\makeatother
+
+% 'Footline' which is truly on the right side
+\defbeamertemplate*{sidebar right}{hpi}{
+	\begin{tikzpicture}
+		% Draw on whole column
+		\useasboundingbox (0,0) rectangle (4.8cm,\the\paperheight);
+		% Logos
+		\ifbool{fakultaet}{
+			\node[inner sep=0,anchor=north east] at (4.8cm - 2.85cm, \the\paperheight - 0.64cm) {\includegraphics[width=2cm]{logo-up.pdf}};
+			\node[inner sep=0,anchor=north east] at (4.8cm - 0.63cm, \the\paperheight - 0.84cm) {\includegraphics[width=1.69cm]{logo-hpi-squares.pdf}};
+		}{
+			\node[inner sep=0,anchor=north east] at (4.8cm - 0.48cm, \the\paperheight - 0.56cm) {\includegraphics[width=3.8cm]{logo-hpi.pdf}};
+		}
+
+		% 0.3cm left margin are simulated by starting the block 0.3cm further to the right
+		% we add 19mm additional margin between slide number and date, thus everything moves up a bit
+		% presentation title; positioning and size from Powerpoint master
+		\node[anchor=south west, text width=4cm, align=flush left] at (0.3cm,\the\paperheight - 9.9cm - 1.45cm + 0.19cm)
+		{\usebeamerfont{title in head/foot}\usebeamercolor[fg]{title in head/foot}\hpiinsertshorttitle\par};
+		% speaker; positioning and size from Powerpoint master
+		\node[anchor=north west, text width=4cm, align=flush left] at (0.3cm,\the\paperheight - 11.54cm + 0.19cm)
+		{\usebeamerfont{author in head/foot}\usebeamercolor[fg]{author in head/foot}\hpiinsertshortauthor\par
+		\usebeamerfont{date in head/foot}\usebeamercolor[fg]{date in head/foot}\insertdate\par};
+		% frame number; positioning and size from Powerpoint master
+		% but: we leave out the word "Chart"
+		\node[anchor=north west, text width=4cm, align=flush left] at (0.3cm,\the\paperheight - 12.84cm)
+		{\usebeamerfont{page number in head/foot}\usebeamercolor[fg]{page number in head/foot}\insertframenumber\par};
+
+		% For Debugging
+		% Area for speaker
+		%\draw (0,\the\paperheight - 9.49cm) rectangle (4.3cm,\the\paperheight - 10.79cm);
+		% Area for Presentation title
+		%\draw (0,\the\paperheight - 11.1cm) rectangle (4.3cm,\the\paperheight - 12.55cm);
+		% Area for frame number
+		%\draw (0,\the\paperheight - 12.84cm) rectangle (4.3cm,\the\paperheight - 13.34cm);
+	\end{tikzpicture}
+}
+\defbeamertemplate{sidebar right}{empty}{}
+
+% title slides have different markup:
+\defbeamertemplate{sidebar right}{hpi-title}{
+	\begin{tikzpicture}
+		% Draw on whole column
+		\useasboundingbox (0,0) rectangle (4.8cm,\the\paperheight);
+		% Logo
+		\node[inner sep=0,anchor=north east] at (4.8cm - 0.48cm, \the\paperheight - 0.56cm) {\includegraphics[width=3.8cm]{logo-hpi-full.pdf}};
+		\ifbool{fakultaet}{
+			% the left edge of the uni logo is 3.79cm left of the left edge of the hpi logo
+			\node[inner sep=0,anchor=north east] at (4.8cm - 0.48cm - 3.8cm - 3.79cm + 2cm, \the\paperheight - 0.56cm) {\includegraphics[width=2cm]{logo-up.pdf}};
+		}{}
+	\end{tikzpicture}
+}
+
+\defbeamertemplate*{background}{hpi-title}{
+	\begin{tikzpicture}
+		% Draw on whole slide
+		\useasboundingbox (0,0) rectangle (\the\paperwidth,\the\paperheight);
+		% Full color background
+		\fill[fill=\pgfkeysvalueof{/hpi-title/color}] (0.5cm, \the\paperheight - 8.15cm) rectangle (0.5cm + 23.89cm, \the\paperheight - 8.15cm - 5.7cm);
+		% Image inbetween
+		{
+			\pgfkeys{/hpi-title/bg/.get=\hpiTitleBg}
+			\ifdefstring{\hpiTitleBg}{none}{}{
+				\begin{scope}
+					\clip (1cm, \the\paperheight - 2.94cm) rectangle (1cm + 23.91cm, \the\paperheight - 2.94cm - 10.4cm);
+					\node[anchor=center] at (1cm + 23.91cm/2, \the\paperheight - 2.94cm - 10.4cm/2) {\includegraphics[width=23.91cm]{../backgrounds/\hpiTitleBg}};
+				\end{scope}
+			}
+		}
+		% Semi-transparent foreground
+		\fill[fill=\pgfkeysvalueof{/hpi-title/color}, opacity=0.7] (0.5cm, \the\paperheight - 8.15cm) rectangle (0.5cm + 23.89cm, \the\paperheight - 8.15cm - 5.7cm);
+	\end{tikzpicture}
+}
+\defbeamertemplate*{title page}{hpi-title}{
+	\begin{tikzpicture}
+		\useasboundingbox (0,0) rectangle (\the\paperwidth, \the\paperheight);
+
+		\node[anchor=north west,text width=23.39cm-0.3cm,align=flush left,inner sep=0] at (0+0.3cm,\the\paperheight-8.13cm-0.7cm){%
+			\usebeamerfont{title}\usebeamercolor[fg]{title}\pgfkeysvalueof{/hpi-title/text}\par%
+		};
+		\node[anchor=north west,text width=13.59cm-0.3cm,align=flush right,inner sep=0] at (9.8cm,\the\paperheight-11cm){%
+			\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par%
+			\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par%
+		};
+		% For Debugging
+		% Area for title
+		%\draw (0,\the\paperheight-8.13cm) rectangle (23.39cm,\the\paperheight-8.13cm-5.2cm);
+		% Area for speaker etc.
+		%\draw (9.8cm,\the\paperheight-11cm) rectangle (9.8cm+13.59cm,\the\paperheight-11cm-2.33cm);
+	\end{tikzpicture}
+}
+
+\defbeamertemplate{background}{hpi-title-small}{
+	\begin{tikzpicture}
+		% Draw on whole slide
+		\useasboundingbox (0,0) rectangle (\the\paperwidth,\the\paperheight);
+		% Full color background
+		\fill[fill=\pgfkeysvalueof{/hpi-title/color}] (0.5cm, \the\paperheight - 10cm) rectangle (0.5cm + 23.89cm, \the\paperheight - 10cm - 3.85cm);
+		% Image inbetween
+		{
+			\pgfkeys{/hpi-title/bg/.get=\hpiTitleBg}
+			\ifdefstring{\hpiTitleBg}{none}{}{
+				\begin{scope}
+					\clip (1cm, \the\paperheight - 2.94cm) rectangle (1cm + 23.91cm, \the\paperheight - 2.94cm - 10.4cm);
+					\node[anchor=center] at (1cm + 23.91cm/2, \the\paperheight - 2.94cm - 10.4cm/2) {\includegraphics[width=23.91cm]{../backgrounds/\hpiTitleBg}};
+				\end{scope}
+			}
+		}
+		% Semi-transparent foreground
+		\fill[fill=\pgfkeysvalueof{/hpi-title/color}, opacity=0.7] (0.5cm, \the\paperheight - 10cm) rectangle (0.5cm + 23.89cm, \the\paperheight - 10cm - 3.85cm);
+	\end{tikzpicture}
+}
+\defbeamertemplate{title page}{hpi-title-small}{
+	\begin{tikzpicture}
+		\useasboundingbox (0,0) rectangle (\the\paperwidth, \the\paperheight);
+
+		\node[anchor=south west,text width=23.39cm-0.3cm,align=flush left,inner sep=0] at (0+0.3cm,\the\paperheight-10cm-3.33cm+0.5cm){%
+			\usebeamerfont{title}\usebeamercolor[fg]{title}\pgfkeysvalueof{/hpi-title/text}\par%
+		};
+		% For Debugging
+		% Area for title
+		%\draw (0,\the\paperheight-10cm) rectangle (23.39cm,\the\paperheight-10cm-3.33cm);
+	\end{tikzpicture}
+}
+
+% by default use standard frame template
+\BeforeBeginEnvironment{frame}{
+	\setbeamertemplate{frametitle}[hpi]
+	\setbeamertemplate{sidebar right}[hpi]
+	\setbeamertemplate{background}[hpi]
+	\newgeometry{left=1cm, right=4.8cm+0.51cm, bottom=0cm, top=0cm} % left: text margin, right: sidebar width + text margin
+}
+
+\pgfkeys{
+	/hpi-title/.is family, /hpi-title,
+	default/.style = {/hpi-title,
+		text = \inserttitle,
+		bg = Hauptgebaeude_Foyer_II,
+		color = hpired,
+	},
+	text/.initial =,
+	bg/.initial =,
+	color/.initial =,
+}
+
+% use title versions for key 'title'
+\makeatletter
+\define@key{beamerframe}{title}[]{%
+	\pgfkeys{/hpi-title, default, #1}
+	\setbeamertemplate{frametitle}[empty]
+	\setbeamertemplate{sidebar right}[hpi-title]
+	\setbeamertemplate{background}[hpi-title]
+	\setbeamertemplate{title page}[hpi-title]
+}
+
+% use small title versions for 'title-small'
+\define@key{beamerframe}{title-small}[]{%
+	\pgfkeys{/hpi-title, default, #1}
+	\setbeamertemplate{frametitle}[empty]
+	\setbeamertemplate{sidebar right}[hpi-title]
+	\setbeamertemplate{background}[hpi-title-small]
+	\setbeamertemplate{title page}[hpi-title-small]
+}
+
+% provide a template for empty slides
+\define@key{beamerframe}{empty}[true]{%
+	\setbeamertemplate{frametitle}[empty]
+	\setbeamertemplate{sidebar right}[empty]
+	\setbeamertemplate{background}[empty]
+	\newgeometry{left=1cm, right=1cm, bottom=1cm, top=1cm}
+}
+\makeatother
+\mode<all>
